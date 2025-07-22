@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading Animation</title>
+</head>
+<body style="font-family: monospace; text-align: center; padding-top: 100px; background-color: #f4f4f4;">
+
+  <div id="loader" style="font-size: 2rem; margin-bottom: 20px;">Loading</div>
+  <div id="status">Starting...</div>
+
+  <script>
+    // This function handles the animation logic
+    function runLoadingAnimation() {
+      const loader = document.getElementById("loader"); // The animated text
+      const status = document.getElementById("status"); // Status message
+
+      const dots = ["", ".", "..", "..."]; // Frames of animation
+      let index = 0;
+      let loops = 0;
+      const maxLoops = 12; // Run for 12 steps (about 6 seconds)
+
+      const timer = setInterval(() => {
+        loader.textContent = "Loading" + dots[index];
+        index = (index + 1) % dots.length;
+
+        if (index === 0) {
+          loops++;
+        }
+
+        if (loops >= maxLoops) {
+          clearInterval(timer); // Stop the loop
+          loader.textContent = "Done.";
+          status.textContent = "All set!";
+          document.body.style.backgroundColor = "#d3fdd3"; // light green
+        }
+      }, 500); // update every 0.5 seconds
+    }
+
+    runLoadingAnimation(); // Start animation on page load
+  </script>
+
+</body>
+</html>
